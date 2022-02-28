@@ -11,7 +11,7 @@ import SwiftUI
 class MainViewModel: ObservableObject {
     @Published var name = ""
     @Published var isLoading: Bool = false
-//    @Published var results: [Result] = []
+    @Published var results: [Result] = []
     var offset: Int = 0
     
     init() {
@@ -28,17 +28,17 @@ class MainViewModel: ObservableObject {
                 return
             }
             do {
-                let response = try JSONDecoder().decode(Welcome.self, from: data)
+                let response = try JSONDecoder().decode(Response.self, from: data)
                 DispatchQueue.main.async {
                     self.name = response.etag
-//                    self.offset = response.data.total
-//                    self.isLoading = false
+                    self.offset = response.data.total
+                    self.isLoading = false
                 }
-                print(response.data.total)
+                print(response)
             }
             
             catch{
-                print("error")
+                print(error)
             }
             
         }

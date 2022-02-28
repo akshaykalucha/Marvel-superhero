@@ -9,20 +9,20 @@ import Foundation
 import SwiftUI
 
 
-struct Welcome: Codable {
+struct Response: Codable {
     let etag: String
     let data: DataClass
 }
 
 struct DataClass: Codable {
     let total: Int
-//    let results: Result
+    let results: [Result]
 }
 
-//struct Result: Codable {
-//    let id: Int
-//    let name: String
-//    let modified: Date
+struct Result: Codable, Hashable {
+    let id: Int
+    let name: String
+    let modified: String
 //    let thumbnail: Thumbnail
 //
 //    enum CodingKeys: String, CodingKey {
@@ -30,14 +30,14 @@ struct DataClass: Codable {
 //        case resultDescription = "description"
 //        case modified, thumbnail
 //    }
-//}
-//
-//struct Thumbnail: Codable {
-//    let path: String
-//    let thumbnailExtension: String
-//
-//    enum CodingKeys: String, CodingKey {
-//        case path
-//        case thumbnailExtension = "extension"
-//    }
-//}
+}
+
+struct Thumbnail: Codable {
+    let path: String
+    let thumbnailExtension: String
+
+    enum CodingKeys: String, CodingKey {
+        case path
+        case thumbnailExtension = "extension"
+    }
+}
