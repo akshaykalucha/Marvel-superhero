@@ -11,11 +11,7 @@ struct HomeView: View {
     @StateObject var dm = MainViewModel()
     var body: some View {
         VStack{
-            if dm.isLoading{
-                Text("Loading...")
-            }else{
-                Text(dm.name)
-            }
+            Text("xdfgc")
         }
     }
 }
