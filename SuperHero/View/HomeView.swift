@@ -17,7 +17,7 @@ struct HomeView: View {
                 }else {
                     ForEach(dm.results, id:\.self){ item in
                         Text("\(item.name)")
-                        AsyncImage(url: URL(string:"\(item.thumbnail.path).jpg")) { image in
+                        AsyncImage(url: URL(string:"\(item.thumbnail.path).\(item.thumbnail.ext)")) { image in
                             image.resizable()
                         } placeholder: {
                             ProgressView()

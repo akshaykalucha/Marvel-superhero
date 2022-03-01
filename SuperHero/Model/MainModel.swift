@@ -19,7 +19,7 @@ struct DataClass: Codable {
     let results: [Result]
 }
 
-struct Result: Codable, Hashable, Identifiable {
+struct Result: Codable, Identifiable, Hashable {
     let id: Int
     let name: String
     let modified: String
@@ -33,4 +33,10 @@ struct Result: Codable, Hashable, Identifiable {
 }
 struct Thumbnail: Codable, Hashable {
     let path: String
+    let ext: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case path
+        case ext = "extension"
+    }
 }
