@@ -33,8 +33,16 @@ class MainViewModel: ObservableObject {
                     self.name = response.etag
                     self.offset = response.data.total
                     self.isLoading = false
+                    for index in 0..<response.data.results.count{
+                        let id = response.data.results[index].id
+                        let name = response.data.results[index].name
+                        let mod = response.data.results[index].modified
+                        let thp = response.data.results[index].thumbnail
+                        let myres = Result(id: id, name: name, modified: mod, thumbnail: thp)
+                        self.results.append(myres)
+                        print(thp)
+                    }
                 }
-                print(response)
             }
             
             catch{
