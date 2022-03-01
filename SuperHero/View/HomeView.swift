@@ -22,7 +22,8 @@ struct HomeView: View {
                         } placeholder: {
                             ProgressView()
                         }
-                        .frame(width: 500, height: 500)
+                        .frame(width: 400, height: 500)
+                        .cornerRadius(15)
                     }
                 }
             }
