@@ -10,11 +10,11 @@ import SwiftUI
 struct HomeView: View {
     @StateObject var dm = MainViewModel()
     var body: some View {
-        ScrollView {
-            VStack{
-                if dm.isLoading{
-                    Text("Loading...")
-                }else {
+        VStack{
+            if dm.isLoading{
+                ProgressView()
+            }else {
+                ScrollView{
                     ForEach(dm.results, id:\.self){ item in
                         Text("\(item.name)")
                         AsyncImage(url: URL(string:"\(item.thumbnail.path).\(item.thumbnail.ext)")) { image in

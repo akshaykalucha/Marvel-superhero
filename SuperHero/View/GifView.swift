@@ -20,7 +20,7 @@ struct GifView: View {
                     Color.white
                         .ignoresSafeArea()
                     
-                    AnimatedImage(url: getImgURL())
+                    AnimatedImage(url: URL(string: "https://c.tenor.com/D3Sf1tHIuXYAAAAC/marvel-dc.gif"))
                         .resizable()
                         .ignoresSafeArea()
                 }
@@ -30,18 +30,12 @@ struct GifView: View {
             }
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.9) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
                 withAnimation(.easeInOut(duration: 0.8)) {
                     animationFinished = true
                 }
             }
         }
-    }
-    
-    func getImgURL() -> URL {
-        let bundle = Bundle.main.path(forResource: "marveldc", ofType: "gif")
-        let url = URL(fileURLWithPath: bundle ?? "")
-        return url
     }
 }
 

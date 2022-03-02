@@ -118,7 +118,6 @@
 				3A78875A27CE3046001B6DC4 /* pokeball.gif */,
 				3A5892DB27C75E3100DB903F /* SuperHeroApp.swift */,
 				3A5892E127C75E3300DB903F /* Preview Content */,
-				3A9EEB2627CCD301004EA830 /* MainViewModel.swift */,
 			);
 			path = SuperHero;
 			sourceTree = "<group>";
@@ -169,6 +168,7 @@
 		3A9EEB2327CCBE4D004EA830 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				3A9EEB2627CCD301004EA830 /* MainViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

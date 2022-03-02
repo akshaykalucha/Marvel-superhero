@@ -40,7 +40,7 @@ class MainViewModel: ObservableObject {
                         let thp = response.data.results[index].thumbnail
                         let myres = Result(id: id, name: name, modified: mod, thumbnail: thp)
                         self.results.append(myres)
-                        print(thp)
+//                        print(thp)
                     }
                 }
             }
