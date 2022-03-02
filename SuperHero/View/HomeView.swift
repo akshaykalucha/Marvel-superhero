@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject var dm = MainViewModel()
+    @State private var count: Int = 0
     var body: some View {
         VStack{
             if dm.isLoading{
@@ -17,6 +18,15 @@ struct HomeView: View {
                 ScrollView{
                     ForEach(dm.results, id:\.self){ item in
                         Text("\(item.name)")
+                            .onAppear {
+                                self.count += 1
+                                if dm.shouldLoadData(id: self.count) {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                                        dm.offset += 20
+                                        dm.fetchData()
+                                    }
+                                }
+                            }
                         AsyncImage(url: URL(string:"\(item.thumbnail.path).\(item.thumbnail.ext)")) { image in
                             image.resizable()
                         } placeholder: {
