@@ -19,7 +19,7 @@ struct CharactersView: View {
                             .foregroundColor(.gray)
                         TextField("Superhero", text: $dm.searchQuery)
                             .autocapitalization(.none)
-                            .disableAutocorrection(true )
+                            .disableAutocorrection(true)
                     }
                     .padding(.vertical, 10)
                     .padding(.horizontal)

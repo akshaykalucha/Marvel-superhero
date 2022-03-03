@@ -26,14 +26,16 @@ class MainViewModel: ObservableObject {
         fetchData()
         searchCancellable = $searchQuery
             .removeDuplicates()
-            .debounce(for: 0.6, scheduler: RunLoop.main)
+            .debounce(for: 0.5, scheduler: RunLoop.main)
             .sink(receiveValue: { str in
-                if str == "" {
+                print(str)
+//                if str == "" {
+//                    self.fetchedCharacters = nil
+//
+//                } else {
                     self.fetchedCharacters = nil
-                    
-                } else {
                     self.searchCharacter(ch: str)
-                }
+//                }
             })
     }
     func searchCharacter(ch: String){
@@ -53,9 +55,9 @@ class MainViewModel: ObservableObject {
             do {
                 let characters = try JSONDecoder().decode(APIResult.self, from: APIData)
                 DispatchQueue.main.async {
-                    if self.fetchedCharacters == nil {
+//                    if self.fetchedCharacters == nil {
                         self.fetchedCharacters = characters.data.results
-                    }
+//                    }
                 }
             } catch {
                 print(error.localizedDescription)
