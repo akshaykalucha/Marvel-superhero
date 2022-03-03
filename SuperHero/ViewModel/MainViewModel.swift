@@ -19,7 +19,7 @@ class MainViewModel: ObservableObject {
     }
 
     func shouldLoadData (id: Int)-> Bool {
-        return id == results.count - 2
+        return id == results.count - 1
     }
     func fetchData() {
         if self.results.count == 0 {
