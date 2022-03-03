@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A3A04E827D09A8F009BDE14 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3A04E727D09A8F009BDE14 /* WebView.swift */; };
+		3A3A04EA27D09EEF009BDE14 /* ComicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3A04E927D09EEF009BDE14 /* ComicsView.swift */; };
+		3A3A04EC27D0A2B0009BDE14 /* ComicsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3A04EB27D0A2B0009BDE14 /* ComicsModel.swift */; };
 		3A5892DC27C75E3100DB903F /* SuperHeroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5892DB27C75E3100DB903F /* SuperHeroApp.swift */; };
 		3A5892E027C75E3300DB903F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5892DF27C75E3300DB903F /* Assets.xcassets */; };
 		3A5892E327C75E3300DB903F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5892E227C75E3300DB903F /* Preview Assets.xcassets */; };
@@ -42,6 +45,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A3A04E727D09A8F009BDE14 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		3A3A04E927D09EEF009BDE14 /* ComicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicsView.swift; sourceTree = "<group>"; };
+		3A3A04EB27D0A2B0009BDE14 /* ComicsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicsModel.swift; sourceTree = "<group>"; };
 		3A5892D827C75E3100DB903F /* SuperHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5892DB27C75E3100DB903F /* SuperHeroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperHeroApp.swift; sourceTree = "<group>"; };
 		3A5892DF27C75E3300DB903F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -153,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				3A9EEB2827CCD395004EA830 /* MainModel.swift */,
+				3A3A04EB27D0A2B0009BDE14 /* ComicsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -164,6 +171,8 @@
 				3A78874E27CE0E70001B6DC4 /* GifView.swift */,
 				3A78876327CE49A3001B6DC4 /* LaunchScreen.storyboard */,
 				3A78876527D08C37001B6DC4 /* CharactersView.swift */,
+				3A3A04E727D09A8F009BDE14 /* WebView.swift */,
+				3A3A04E927D09EEF009BDE14 /* ComicsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -318,9 +327,12 @@
 				3A78874F27CE0E70001B6DC4 /* GifView.swift in Sources */,
 				3A9EEB2927CCD395004EA830 /* MainModel.swift in Sources */,
 				3A78876627D08C37001B6DC4 /* CharactersView.swift in Sources */,
+				3A3A04EC27D0A2B0009BDE14 /* ComicsModel.swift in Sources */,
 				3A5892DC27C75E3100DB903F /* SuperHeroApp.swift in Sources */,
+				3A3A04EA27D09EEF009BDE14 /* ComicsView.swift in Sources */,
 				3A9EEB2527CCBE78004EA830 /* HomeView.swift in Sources */,
 				3A9EEB2727CCD301004EA830 /* MainViewModel.swift in Sources */,
+				3A3A04E827D09A8F009BDE14 /* WebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

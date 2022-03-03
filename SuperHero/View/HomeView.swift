@@ -18,11 +18,12 @@ struct HomeView: View {
                     Text("Characters")
                 }
                 .environmentObject(dm)
-            Text("Comics")
+            ComicsView()
                 .tabItem {
                     Image(systemName: "books.vertical.fill")
                     Text("Comics")
                 }
+                .environmentObject(dm)
         }
     }
 }

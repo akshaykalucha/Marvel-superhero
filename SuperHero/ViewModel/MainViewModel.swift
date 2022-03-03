@@ -18,6 +18,9 @@ class MainViewModel: ObservableObject {
     @Published var fetchedCharacters: [Result]? = nil
     // Cancel the search publisher whenevrver needed
     var searchCancellable: AnyCancellable? = nil
+    @Published var fetchedComics: [Comic] = []
+    
+    
     
     init() {
         fetchData()
@@ -61,6 +64,32 @@ class MainViewModel: ObservableObject {
         .resume()
     }
 
+    func fetchComics(){
+        let url = "https://gateway.marvel.com/v1/public/comics?limit=20&offset=\(self.offset)&apikey=3fb5c86240a009ead7052eb4aad4d08c&ts=1646036094096&hash=711d7a634d78f820f2fc380aaffa6c4f"
+        
+        let session = URLSession(configuration: .default)
+        session.dataTask(with: URL(string:url)!) { (data, _, err) in
+            if let error = err{
+                debugPrint(error)
+                return
+            }
+            guard let APIData = data else {
+                print("NO data found")
+                return
+            }
+            do {
+                let characters = try JSONDecoder().decode(APIComicResult.self, from: APIData)
+                DispatchQueue.main.async {
+                    self.fetchedComics.append(contentsOf: characters.data.results)
+                }
+            } catch {
+                debugPrint(error)
+            }
+        }
+        .resume()
+    }
+    
+    
     func shouldLoadData (id: Int)-> Bool {
         return id == results.count - 1
     }
