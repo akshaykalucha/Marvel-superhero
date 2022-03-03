@@ -7,15 +7,58 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 class MainViewModel: ObservableObject {
     @Published var name = ""
     @Published var isLoading: Bool = false
     @Published var results: [Result] = []
     @Published var offset: Int = 0
+    @Published var searchQuery = ""
+    @Published var fetchedCharacters: [Result]? = nil
+    // Cancel the search publisher whenevrver needed
+    var searchCancellable: AnyCancellable? = nil
     
     init() {
         fetchData()
+        searchCancellable = $searchQuery
+            .removeDuplicates()
+            .debounce(for: 0.6, scheduler: RunLoop.main)
+            .sink(receiveValue: { str in
+                if str == "" {
+                    self.fetchedCharacters = nil
+                    
+                } else {
+                    self.searchCharacter(ch: str)
+                }
+            })
+    }
+    func searchCharacter(ch: String){
+        let originalQuery = searchQuery.replacingOccurrences(of: " ", with: "%20")
+        let url = "https://gateway.marvel.com/v1/public/characters?nameStartsWith=\(originalQuery)&apikey=3fb5c86240a009ead7052eb4aad4d08c&ts=1646036094096&hash=711d7a634d78f820f2fc380aaffa6c4f"
+        
+        let session = URLSession(configuration: .default)
+        session.dataTask(with: URL(string:url)!) { (data, _, err) in
+            if let error = err{
+                print(error.localizedDescription)
+                return
+            }
+            guard let APIData = data else {
+                print("NO data found")
+                return
+            }
+            do {
+                let characters = try JSONDecoder().decode(APIResult.self, from: APIData)
+                DispatchQueue.main.async {
+                    if self.fetchedCharacters == nil {
+                        self.fetchedCharacters = characters.data.results
+                    }
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        .resume()
     }
 
     func shouldLoadData (id: Int)-> Bool {
@@ -43,7 +86,8 @@ class MainViewModel: ObservableObject {
                         let name = response.data.results[index].name
                         let mod = response.data.results[index].modified
                         let thp = response.data.results[index].thumbnail
-                        let myres = Result(id: id, name: name, modified: mod, thumbnail: thp)
+                        let desc = response.data.results[index].description
+                        let myres = Result(id: id, name: name, description: desc, modified: mod, thumbnail: thp)
                         self.results.append(myres)
                     }
                 }
