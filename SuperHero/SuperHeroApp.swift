@@ -12,6 +12,7 @@ struct SuperHeroApp: App {
     var body: some Scene {
         WindowGroup {
             GifView()
+                .environmentObject(MainViewModel())
         }
     }
 }

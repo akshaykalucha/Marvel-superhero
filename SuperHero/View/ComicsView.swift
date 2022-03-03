@@ -14,55 +14,64 @@ struct ComicsView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView(.vertical, showsIndicators: true) {
-                if homeData.fetchedComics.isEmpty {
-                    ProgressView()
-                        .padding(.top, 30)
-                }
-                else {
-                    VStack(spacing: 15) {
-                        ForEach(homeData.fetchedComics){ comic in
-                            ComicRowView(character: comic)
+            GeometryReader { geometry in
+                ZStack {
+                    Image("bg")
+                        .resizable()
+                        .edgesIgnoringSafeArea(.all)
+                        .aspectRatio(geometry.size, contentMode: .fill)
+                    ScrollView(.vertical, showsIndicators: true) {
+                        if homeData.fetchedComics.isEmpty {
+                            ProgressView()
+                                .padding(.top, 30)
                         }
-                        if homeData.offset == homeData.fetchedComics.count {
-                             ProgressView()
-                                .padding(.vertical)
-                                .onAppear {
-                                    print("fetching")
-                                    homeData.fetchComics()
+                        else {
+                            VStack(spacing: 15) {
+                                ForEach(homeData.fetchedComics){ comic in
+                                    ComicRowView(character: comic)
                                 }
-                        } else {
-                            GeometryReader{reader -> Color in
-                                let minY = reader.frame(in: .global).minY
-                                let height = UIScreen.main.bounds.height / 1.3
-                                
-                                if !homeData.fetchedComics.isEmpty && minY < height {
-                                    print("last")
-                                    DispatchQueue.main.async {
-                                        homeData.offset = homeData.fetchedComics.count
+                                if homeData.offset == homeData.fetchedComics.count {
+                                    ProgressView()
+                                        .padding(.vertical)
+                                        .onAppear {
+                                            print("fetching")
+                                            homeData.fetchComics()
+                                        }
+                                } else {
+                                    GeometryReader{reader -> Color in
+                                        let minY = reader.frame(in: .global).minY
+                                        let height = UIScreen.main.bounds.height / 1.3
+                                        
+                                        if !homeData.fetchedComics.isEmpty && minY < height {
+                                            print("last")
+                                            DispatchQueue.main.async {
+                                                homeData.offset = homeData.fetchedComics.count
+                                            }
+                                        }
+                                        return Color.clear
                                     }
+                                    .frame(width: 20, height: 20)
                                 }
-                                return Color.clear
                             }
-                            .frame(width: 20, height: 20)
+                            .padding(.vertical)
                         }
                     }
-                    .padding(.vertical)
+                    .navigationTitle("Marvel Comics")
+                }
+                .onAppear {
+                    if homeData.fetchedComics.isEmpty {
+                        homeData.fetchComics()
+                    }
                 }
             }
-            .navigationTitle("Marvel Comics")
-        }
-        .onAppear {
-            if homeData.fetchedComics.isEmpty {
-                homeData.fetchComics()
-            }
+            
         }
     }
 }
 
 struct ComicsView_Previews: PreviewProvider {
     static var previews: some View {
-        ComicsView()
+        ComicsView().environmentObject(MainViewModel())
     }
 }
 
@@ -85,16 +94,21 @@ struct ComicRowView: View {
                 Text(character.title)
                     .font(.title3)
                     .fontWeight(.bold)
+                    .padding(.top, 2)
                 if let description = character.description {
                     Text(description)
                         .font(.caption)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.white)
                         .lineLimit(4)
                         .multilineTextAlignment(.leading)
+                        .padding(.bottom)
                 }
             }
             Spacer(minLength: 0)
         }
+        .background(.black.opacity(0.4))
+        .cornerRadius(8)
+        .frame(height: 180)
         .padding(.horizontal)
     }
     
@@ -104,4 +118,4 @@ struct ComicRowView: View {
         return URL(string: "\(path).\(ext)")!
     }
 }
- 
+

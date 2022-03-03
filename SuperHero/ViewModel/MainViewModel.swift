@@ -42,6 +42,7 @@ class MainViewModel: ObservableObject {
                         self.toSearch = false
                         self.loadAgain = false
                     }
+                    self.NoRes = false
                     print("empty query")
                 }else { self.NoRes = false }
                 for chr in self.searchQuery{
@@ -145,15 +146,15 @@ class MainViewModel: ObservableObject {
                     self.isLoading = false
                     self.firstLoad = false
                     self.fetchedCharacters.append(contentsOf: response.data.results)
-//                    for index in 0..<response.data.results.count{
-//                        let id = response.data.results[index].id
-//                        let name = response.data.results[index].name
-//                        let mod = response.data.results[index].modified
-//                        let thp = response.data.results[index].thumbnail
-//                        let desc = response.data.results[index].description
-//                        let myres = Result(id: id, name: name, description: desc, modified: mod, thumbnail: thp)
-//                        self.results.append(myres)
-//                    }
+                    for index in 0..<response.data.results.count{
+                        let id = response.data.results[index].id
+                        let name = response.data.results[index].name
+                        let mod = response.data.results[index].modified
+                        let thp = response.data.results[index].thumbnail
+                        let desc = response.data.results[index].description
+                        let myres = Result(id: id, name: name, description: desc, modified: mod, thumbnail: thp)
+                        self.results.append(myres)
+                    }
                 }
             }
             
