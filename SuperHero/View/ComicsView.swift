@@ -14,7 +14,7 @@ struct ComicsView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView(.vertical, showsIndicators: false) {
+            ScrollView(.vertical, showsIndicators: true) {
                 if homeData.fetchedComics.isEmpty {
                     ProgressView()
                         .padding(.top, 30)

@@ -10,9 +10,10 @@ import SDWebImageSwiftUI
 
 struct CharactersView: View {
     @EnvironmentObject var dm: MainViewModel
+
     var body: some View {
         NavigationView {
-            ScrollView(.vertical, showsIndicators: false) {
+            ScrollView(.vertical, showsIndicators: true) {
                 VStack(spacing: 15) {
                     HStack(spacing: 10) {
                         Image(systemName: "magnifyingglass")
@@ -31,18 +32,39 @@ struct CharactersView: View {
                 
                 if let characters = dm.fetchedCharacters{
                     if characters.isEmpty{
-                        Text("No results...")
-                            .padding(.top, 20)
+                        if dm.NoRes {
+                            Text("No result found")
+                                .padding(.top, 20)
+                        } else{
+                            ProgressView()
+                                .padding(.top, 20)
+                        }
                     } else {
                         ForEach(characters){ data in
                             CharacterRowView(character: data)
                         }
                     }
                 }
-                else {
-                    if dm.searchQuery != "" {
-                        ProgressView()
-                            .padding(.top, 20)
+                if dm.mainOffset == dm.fetchedCharacters.count && !dm.firstLoad && dm.searchQuery == "" {
+                    ProgressView()
+                       .padding(.vertical)
+                       .onAppear {
+                           print("fetching")
+                           dm.fetchData()
+                       }
+                } else {
+                    GeometryReader{reader -> Color in
+                        let minY = reader.frame(in: .global).minY
+                        let height = UIScreen.main.bounds.height / 1.3
+                        
+                        if !dm.fetchedCharacters.isEmpty && minY < height {
+                            print("last")
+                            DispatchQueue.main.async {
+                                dm.mainOffset = dm.fetchedCharacters.count
+                            }
+                            
+                        }
+                        return Color.clear
                     }
                 }
             }

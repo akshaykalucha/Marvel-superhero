@@ -15,31 +15,55 @@ class MainViewModel: ObservableObject {
     @Published var results: [Result] = []
     @Published var offset: Int = 0
     @Published var searchQuery = ""
-    @Published var fetchedCharacters: [Result]? = nil
+    @Published var fetchedCharacters: [Result] = []
     // Cancel the search publisher whenevrver needed
     var searchCancellable: AnyCancellable? = nil
     @Published var fetchedComics: [Comic] = []
+    @Published var mainOffset: Int = 0
+    @Published var firstLoad: Bool = false
+    @Published var NoRes: Bool = false
     
+    var toSearch: Bool = false
     
+    var loadAgain: Bool = false
     
     init() {
+        firstLoad = true
         fetchData()
         searchCancellable = $searchQuery
             .removeDuplicates()
             .debounce(for: 0.5, scheduler: RunLoop.main)
             .sink(receiveValue: { str in
+                if str == "" {
+                    if self.loadAgain {
+                        self.fetchedCharacters = []
+                        self.fetchData()
+                        self.mainOffset = 0
+                        self.toSearch = false
+                        self.loadAgain = false
+                    }
+                    print("empty query")
+                }else { self.NoRes = false }
+                for chr in self.searchQuery{
+                    if chr != " "{
+                        self.toSearch = true
+                    }
+                }
                 print(str)
 //                if str == "" {
 //                    self.fetchedCharacters = nil
 //
 //                } else {
-                    self.fetchedCharacters = nil
+                if self.toSearch{
+                    self.fetchedCharacters = []
                     self.searchCharacter(ch: str)
-//                }
+                }
+                //                }
             })
     }
     func searchCharacter(ch: String){
         let originalQuery = searchQuery.replacingOccurrences(of: " ", with: "%20")
+        print(originalQuery)
         let url = "https://gateway.marvel.com/v1/public/characters?nameStartsWith=\(originalQuery)&apikey=3fb5c86240a009ead7052eb4aad4d08c&ts=1646036094096&hash=711d7a634d78f820f2fc380aaffa6c4f"
         
         let session = URLSession(configuration: .default)
@@ -55,6 +79,13 @@ class MainViewModel: ObservableObject {
             do {
                 let characters = try JSONDecoder().decode(APIResult.self, from: APIData)
                 DispatchQueue.main.async {
+                    if characters.data.results.count == 0 {
+                        self.NoRes = true
+                    }else{
+                        self.NoRes = false
+                    }
+                    self.firstLoad = true
+                    self.loadAgain = true
 //                    if self.fetchedCharacters == nil {
                         self.fetchedCharacters = characters.data.results
 //                    }
@@ -99,7 +130,7 @@ class MainViewModel: ObservableObject {
         if self.results.count == 0 {
             isLoading = true
         }
-        guard let url = URL(string:"https://gateway.marvel.com/v1/public/characters?apikey=3fb5c86240a009ead7052eb4aad4d08c&ts=1646036094096&hash=711d7a634d78f820f2fc380aaffa6c4f&offset=\(self.offset)") else {
+        guard let url = URL(string:"https://gateway.marvel.com/v1/public/characters?apikey=3fb5c86240a009ead7052eb4aad4d08c&ts=1646036094096&hash=711d7a634d78f820f2fc380aaffa6c4f&offset=\(self.mainOffset)") else {
             return
         }
         
@@ -112,15 +143,17 @@ class MainViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.name = response.etag
                     self.isLoading = false
-                    for index in 0..<response.data.results.count{
-                        let id = response.data.results[index].id
-                        let name = response.data.results[index].name
-                        let mod = response.data.results[index].modified
-                        let thp = response.data.results[index].thumbnail
-                        let desc = response.data.results[index].description
-                        let myres = Result(id: id, name: name, description: desc, modified: mod, thumbnail: thp)
-                        self.results.append(myres)
-                    }
+                    self.firstLoad = false
+                    self.fetchedCharacters.append(contentsOf: response.data.results)
+//                    for index in 0..<response.data.results.count{
+//                        let id = response.data.results[index].id
+//                        let name = response.data.results[index].name
+//                        let mod = response.data.results[index].modified
+//                        let thp = response.data.results[index].thumbnail
+//                        let desc = response.data.results[index].description
+//                        let myres = Result(id: id, name: name, description: desc, modified: mod, thumbnail: thp)
+//                        self.results.append(myres)
+//                    }
                 }
             }
             
