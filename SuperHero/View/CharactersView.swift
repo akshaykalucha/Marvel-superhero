@@ -35,16 +35,17 @@ struct CharactersView: View {
                             HStack(spacing: 10) {
                                 Image(systemName: "magnifyingglass")
                                     .foregroundColor(.gray)
-                                TextField("Superhero", text: $dm.searchQuery)
+                                TextField("Your favourite character", text: $dm.searchQuery)
                                     .autocapitalization(.none)
                                     .disableAutocorrection(true)
                                 //                                .focused($focusedField, equals: .yourTextEdit)
                                     .foregroundColor(Color.black)
-                                Button {
-                                    sm.callSAPI(ch: "venom")
-                                } label: {
-                                    Text("Click here")
-                                }
+//                                Button {
+//                                    sm.callSAPI(ch: "d 00")
+//                                    print("clicked")
+//                                } label: {
+//                                    Text("Click here")
+//                                }
 
                             }
                             .padding(.vertical, 10)
@@ -110,7 +111,7 @@ struct CharactersView: View {
                     //            }))
                 }
             }
-            .navigationTitle("Marvel")
+            .navigationTitle("Superheroes")
         }
     }
 }
