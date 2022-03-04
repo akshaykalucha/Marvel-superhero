@@ -24,12 +24,14 @@ struct HomeView: View {
                     Image(systemName: "person.3.fill")
                     Text("Characters")
                 }
+                .environmentObject(dm)
             ComicsView()
                 .clipped()
                 .tabItem {
                     Image(systemName: "books.vertical.fill")
                     Text("Comics")
                 }
+                .environmentObject(dm)
         }.accentColor(.orange)
     }
 }

@@ -22,6 +22,7 @@ class MainViewModel: ObservableObject {
     @Published var mainOffset: Int = 0
     @Published var firstLoad: Bool = false
     @Published var NoRes: Bool = false
+    @Published var isShowingModal: Bool = false
     
     
     var toSearch: Bool = false

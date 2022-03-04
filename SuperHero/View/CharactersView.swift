@@ -9,19 +9,16 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 
-
-
 struct CharactersView: View {
     @EnvironmentObject var dm: MainViewModel
+    @State private var showModall = false
     
-//    @StateObject var sm = SuperHero()
+    //    @StateObject var sm = SuperHero()
     
-    @State private var showModal = false
-    
-    private enum Field: Int {
-        case yourTextEdit
-    }
-    @FocusState private var focusedField: Field?
+        private enum Field: Int {
+            case yourTextEdit
+        }
+        @FocusState private var focusedField: Field?
     
     
     var body: some View {
@@ -92,16 +89,26 @@ struct CharactersView: View {
                         UIScrollView.appearance().keyboardDismissMode = .onDrag
                     }
                 }
+                ModalView()
             }
             .navigationTitle("Superheroes")
         }
+        .statusBar(hidden: true)
     }
 }
 
 
+struct CharactersView_Previews: PreviewProvider {
+    static var previews: some View {
+        CharactersView().environmentObject(MainViewModel())
+    }
+}
+
+
+
 struct CharacterRowView: View {
     var character: Result
-    @State private var showModal = false
+    @EnvironmentObject var vm: MainViewModel
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
@@ -124,20 +131,18 @@ struct CharacterRowView: View {
                     .multilineTextAlignment(.leading)
                 Spacer()
                 Button {
-                    showModal = true
-                    print(showModal)
+                    vm.isShowingModal = true
                 } label: {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(Color.orange)
                         .overlay (
-                        Text("Details")
-                            .foregroundColor(Color.black)
-                            .font(.system(size: 12))
+                            Text("Details")
+                                .foregroundColor(Color.black)
+                                .font(.system(size: 12))
                         )
                         .frame(width: 60, height: 20)
                         .padding(.bottom, 5)
                 }
-
             }
             Spacer(minLength: 0)
         }
@@ -151,12 +156,5 @@ struct CharacterRowView: View {
         let path = character.thumbnail.path
         let ext = character.thumbnail.ext
         return "\(path).\(ext)"
-    }
-}
-
-
-struct CharactersView_Previews: PreviewProvider {
-    static var previews: some View {
-        CharactersView()
     }
 }
