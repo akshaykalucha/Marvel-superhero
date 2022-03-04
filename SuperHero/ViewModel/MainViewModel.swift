@@ -37,11 +37,12 @@ class MainViewModel: ObservableObject {
                 if str == "" {
                     if self.loadAgain {
                         self.fetchedCharacters = []
-                        self.fetchData()
                         self.mainOffset = 0
+                        self.fetchData()
                         self.toSearch = false
                         self.loadAgain = false
                     }
+                    self.mainOffset = 0
                     self.NoRes = false
                     print("empty query")
                 }else { self.NoRes = false }
