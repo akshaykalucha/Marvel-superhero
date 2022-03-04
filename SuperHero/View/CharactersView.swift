@@ -13,6 +13,9 @@ import SDWebImageSwiftUI
 
 struct CharactersView: View {
     @EnvironmentObject var dm: MainViewModel
+    
+    @StateObject var sm = SuperHero()
+    
     private enum Field: Int {
         case yourTextEdit
     }
@@ -37,6 +40,12 @@ struct CharactersView: View {
                                     .disableAutocorrection(true)
                                 //                                .focused($focusedField, equals: .yourTextEdit)
                                     .foregroundColor(Color.black)
+                                Button {
+                                    sm.callSAPI(ch: "venom")
+                                } label: {
+                                    Text("Click here")
+                                }
+
                             }
                             .padding(.vertical, 10)
                             .padding(.horizontal)

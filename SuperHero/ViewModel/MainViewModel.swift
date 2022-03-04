@@ -23,6 +23,7 @@ class MainViewModel: ObservableObject {
     @Published var firstLoad: Bool = false
     @Published var NoRes: Bool = false
     
+    
     var toSearch: Bool = false
     
     var loadAgain: Bool = false
