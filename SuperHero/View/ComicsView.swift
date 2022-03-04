@@ -56,7 +56,7 @@ struct ComicsView: View {
                             .padding(.vertical)
                         }
                     }
-                    .navigationTitle("Marvel Comics")
+                    .navigationTitle("Top Comics")
                 }
                 .onAppear {
                     if homeData.fetchedComics.isEmpty {
@@ -87,29 +87,42 @@ struct ComicRowView: View {
             WebImage(url: extractImage(data: character.thumbnail))
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 150, height: 150)
+                .frame(width: 170, height: 170)
                 .cornerRadius(8)
             
             VStack(alignment: .leading, spacing: 8) {
                 Text(character.title)
                     .font(.title3)
                     .fontWeight(.bold)
-                    .padding(.top, 2)
+                    .padding(.top, 4)
                 if let description = character.description {
                     Text(description)
                         .font(.caption)
                         .foregroundColor(.white)
                         .lineLimit(4)
                         .multilineTextAlignment(.leading)
-                        .padding(.bottom)
+                }
+                Spacer()
+                Button {
+
+                } label: {
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color.orange)
+                        .overlay (
+                        Text("Details")
+                            .foregroundColor(Color.black)
+                            .font(.system(size: 12))
+                        )
+                        .frame(width: 60, height: 20)
+                        .padding(.bottom, 5)
                 }
             }
             Spacer(minLength: 0)
         }
-        .background(.black.opacity(0.4))
+        .background(Color(red: 236/255, green: 166/255, blue: 166/255).opacity(0.6))
         .cornerRadius(8)
-        .frame(height: 180)
-        .padding(.horizontal)
+        .frame(width: UIScreen.main.bounds.width * 0.97)
+        .padding(.bottom, 6)
     }
     
     func extractImage(data: [String: String])-> URL {
