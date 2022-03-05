@@ -15,85 +15,82 @@ struct CharactersView: View {
     
     //    @StateObject var sm = SuperHero()
     
-        private enum Field: Int {
-            case yourTextEdit
-        }
-        @FocusState private var focusedField: Field?
+    private enum Field: Int {
+        case yourTextEdit
+    }
+    @FocusState private var focusedField: Field?
     
     
     var body: some View {
-        NavigationView {
-            GeometryReader { geometry in
-                ZStack {
-                    Image("bg")
-                        .resizable()
-                        .edgesIgnoringSafeArea(.all)
-                        .aspectRatio(geometry.size, contentMode: .fill)
-                    ScrollView(.vertical, showsIndicators: true) {
-                        VStack(spacing: 15) {
-                            HStack(spacing: 10) {
-                                Image(systemName: "magnifyingglass")
-                                    .foregroundColor(.gray)
-                                TextField("Your favourite character", text: $dm.searchQuery)
-                                    .autocapitalization(.none)
-                                    .disableAutocorrection(true)
-                                    .foregroundColor(Color.black)
-                            }
-                            .padding(.vertical, 10)
-                            .padding(.horizontal)
-                            .background(Color.white)
-                            .cornerRadius(8)
-                            .shadow(color: Color.black.opacity(0.09), radius: 5, x: 5, y: 5)
-                            .shadow(color: Color.black.opacity(0.09), radius: 5, x: -5, y: -5)
+        GeometryReader { geometry in
+            ZStack {
+                Image("bg")
+                    .resizable()
+                    .edgesIgnoringSafeArea(.all)
+                    .aspectRatio(geometry.size, contentMode: .fill)
+                ScrollView(.vertical, showsIndicators: true) {
+                    VStack(spacing: 15) {
+                        HStack(spacing: 10) {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.gray)
+                            TextField("Your favourite character", text: $dm.searchQuery)
+                                .autocapitalization(.none)
+                                .disableAutocorrection(true)
+                                .foregroundColor(Color.black)
                         }
-                        .padding()
-                        
-                        if let characters = dm.fetchedCharacters{
-                            if characters.isEmpty{
-                                if dm.NoRes {
-                                    Text("No result found")
-                                        .padding(.top, 20)
-                                } else{
-                                    ProgressView()
-                                        .padding(.top, 20)
-                                }
-                            } else {
-                                ForEach(characters){ data in
-                                    CharacterRowView(character: data)
-                                }
-                            }
-                        }
-                        if dm.mainOffset == dm.fetchedCharacters.count && !dm.firstLoad && dm.searchQuery == "" {
-                            ProgressView()
-                                .padding(.vertical)
-                                .onAppear {
-                                    print("fetching")
-                                    dm.fetchData()
-                                }
-                        } else {
-                            GeometryReader{reader -> Color in
-                                let minY = reader.frame(in: .global).minY
-                                let height = UIScreen.main.bounds.height / 1.3
-                                
-                                if !dm.fetchedCharacters.isEmpty && minY < height {
-                                    print("last")
-                                    DispatchQueue.main.async {
-                                        dm.mainOffset = dm.fetchedCharacters.count
-                                    }
-                                    
-                                }
-                                return Color.clear
-                            }
-                        }
-                    }.onAppear {
-                        UIScrollView.appearance().keyboardDismissMode = .onDrag
+                        .padding(.vertical, 10)
+                        .padding(.horizontal)
+                        .background(Color.white)
+                        .cornerRadius(8)
+                        .shadow(color: Color.black.opacity(0.09), radius: 5, x: 5, y: 5)
+                        .shadow(color: Color.black.opacity(0.09), radius: 5, x: -5, y: -5)
                     }
+                    .padding()
+                    
+                    if let characters = dm.fetchedCharacters{
+                        if characters.isEmpty{
+                            if dm.NoRes {
+                                Text("No result found")
+                                    .padding(.top, 20)
+                            } else{
+                                ProgressView()
+                                    .padding(.top, 20)
+                            }
+                        } else {
+                            ForEach(characters){ data in
+                                CharacterRowView(character: data)
+                            }
+                        }
+                    }
+                    if dm.mainOffset == dm.fetchedCharacters.count && !dm.firstLoad && dm.searchQuery == "" {
+                        ProgressView()
+                            .padding(.vertical)
+                            .onAppear {
+                                print("fetching")
+                                dm.fetchData()
+                            }
+                    } else {
+                        GeometryReader{reader -> Color in
+                            let minY = reader.frame(in: .global).minY
+                            let height = UIScreen.main.bounds.height / 1.3
+                            
+                            if !dm.fetchedCharacters.isEmpty && minY < height {
+                                print("last")
+                                DispatchQueue.main.async {
+                                    dm.mainOffset = dm.fetchedCharacters.count
+                                }
+                                
+                            }
+                            return Color.clear
+                        }
+                    }
+                }.onAppear {
+                    UIScrollView.appearance().keyboardDismissMode = .onDrag
                 }
-                ModalView()
             }
-            .navigationTitle("Superheroes")
+            ModalView()
         }
-        .statusBar(hidden: true)
+        .navigationTitle("Superheroes")
     }
 }
 

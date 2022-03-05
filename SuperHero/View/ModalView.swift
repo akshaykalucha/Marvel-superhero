@@ -42,6 +42,7 @@ struct ModalView: View {
             ZStack{
                 Capsule()
                     .frame(width: 40, height: 5)
+                    .foregroundColor(Color.black)
             }
             .frame(height: 40)
             .frame(maxWidth: .infinity)
@@ -50,11 +51,13 @@ struct ModalView: View {
             ZStack{
                 VStack{
                     Text("This is a marvel comic modal to view your favourite super heroes")
+                        .foregroundColor(Color.black)
                         .font(.system(size: 25, weight: .regular))
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.bottom, 10)
                     Text("iron man")
+                        .foregroundColor(Color.black)
                         .font(.system(size: 20, weight: .bold))
                 }
                 .padding(.horizontal, 30)

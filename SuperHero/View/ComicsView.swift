@@ -13,50 +13,47 @@ struct ComicsView: View {
     @EnvironmentObject var homeData: MainViewModel
     
     var body: some View {
-        NavigationView {
-            GeometryReader { geometry in
-                ZStack {
-                    Image("bg")
-                        .resizable()
-                        .edgesIgnoringSafeArea(.all)
-                        .aspectRatio(geometry.size, contentMode: .fill)
-                    ScrollView(.vertical, showsIndicators: true) {
-                        if homeData.fetchedComics.isEmpty {
-                            ProgressView()
-                                .padding(.top, 30)
-                        }
-                        else {
-                            VStack(spacing: 15) {
-                                ForEach(homeData.fetchedComics){ comic in
-                                    ComicRowView(character: comic)
-                                }
-                                if homeData.offset == homeData.fetchedComics.count {
-                                    ProgressView()
-                                        .padding(.vertical)
-                                        .onAppear {
-                                            print("fetching")
-                                            homeData.fetchComics()
-                                        }
-                                } else {
-                                    GeometryReader{reader -> Color in
-                                        let minY = reader.frame(in: .global).minY
-                                        let height = UIScreen.main.bounds.height / 1.3
-                                        
-                                        if !homeData.fetchedComics.isEmpty && minY < height {
-                                            print("last")
-                                            DispatchQueue.main.async {
-                                                homeData.offset = homeData.fetchedComics.count
-                                            }
-                                        }
-                                        return Color.clear
-                                    }
-                                    .frame(width: 20, height: 20)
-                                }
-                            }
-                            .padding(.vertical)
-                        }
+        GeometryReader { geometry in
+            ZStack {
+                Image("bg")
+                    .resizable()
+                    .edgesIgnoringSafeArea(.all)
+                    .aspectRatio(geometry.size, contentMode: .fill)
+                ScrollView(.vertical, showsIndicators: true) {
+                    if homeData.fetchedComics.isEmpty {
+                        ProgressView()
+                            .padding(.top, 30)
                     }
-                    .navigationTitle("Top Comics")
+                    else {
+                        VStack(spacing: 15) {
+                            ForEach(homeData.fetchedComics){ comic in
+                                ComicRowView(character: comic)
+                            }
+                            if homeData.offset == homeData.fetchedComics.count {
+                                ProgressView()
+                                    .padding(.vertical)
+                                    .onAppear {
+                                        print("fetching")
+                                        homeData.fetchComics()
+                                    }
+                            } else {
+                                GeometryReader{reader -> Color in
+                                    let minY = reader.frame(in: .global).minY
+                                    let height = UIScreen.main.bounds.height / 1.3
+                                    
+                                    if !homeData.fetchedComics.isEmpty && minY < height {
+                                        print("last")
+                                        DispatchQueue.main.async {
+                                            homeData.offset = homeData.fetchedComics.count
+                                        }
+                                    }
+                                    return Color.clear
+                                }
+                                .frame(width: 20, height: 20)
+                            }
+                        }
+                        .padding(.vertical)
+                    }
                 }
                 .onAppear {
                     if homeData.fetchedComics.isEmpty {
@@ -104,14 +101,14 @@ struct ComicRowView: View {
                 }
                 Spacer()
                 Button {
-
+                    
                 } label: {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(Color.orange)
                         .overlay (
-                        Text("Details")
-                            .foregroundColor(Color.black)
-                            .font(.system(size: 12))
+                            Text("Details")
+                                .foregroundColor(Color.black)
+                                .font(.system(size: 12))
                         )
                         .frame(width: 60, height: 20)
                         .padding(.bottom, 5)
