@@ -15,10 +15,10 @@ struct CharactersView: View {
     
     //    @StateObject var sm = SuperHero()
     
-    private enum Field: Int {
-        case yourTextEdit
-    }
-    @FocusState private var focusedField: Field?
+//    private enum Field: Int {
+//        case yourTextEdit
+//    }
+//    @FocusState private var focusedField: Field?
     
     
     var body: some View {

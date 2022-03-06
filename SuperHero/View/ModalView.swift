@@ -112,6 +112,7 @@ struct ModalView: View {
 struct NewView_Previews: PreviewProvider {
     @State private var show = false
     static var previews: some View {
-        CharactersView().environmentObject(MainViewModel())
+        CharactersView()
+            .environmentObject(MainViewModel())
     }
 }
