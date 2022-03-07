@@ -24,6 +24,8 @@ class MainViewModel: ObservableObject {
     @Published var NoRes: Bool = false
     @Published var isShowingModal: Bool = false
     
+    @Published var modalData: Result? = nil
+    
     
     var toSearch: Bool = false
     
@@ -46,7 +48,7 @@ class MainViewModel: ObservableObject {
                     }
                     self.mainOffset = 0
                     self.NoRes = false
-                    print("empty query")
+//                    print("empty query")
                 }else { self.NoRes = false }
                 for chr in self.searchQuery{
                     if chr != " "{
@@ -77,7 +79,7 @@ class MainViewModel: ObservableObject {
                 return
             }
             guard let APIData = data else {
-                print("NO data found")
+//                print("NO data found")
                 return
             }
             do {
@@ -111,7 +113,7 @@ class MainViewModel: ObservableObject {
                 return
             }
             guard let APIData = data else {
-                print("NO data found")
+//                print("NO data found")
                 return
             }
             do {
@@ -155,7 +157,11 @@ class MainViewModel: ObservableObject {
                         let mod = response.data.results[index].modified
                         let thp = response.data.results[index].thumbnail
                         let desc = response.data.results[index].description
-                        let myres = Result(id: id, name: name, description: desc, modified: mod, thumbnail: thp)
+                        let comic = response.data.results[index].comics
+                        let ser = response.data.results[index].series
+                        let event = response.data.results[index].events
+                        let story = response.data.results[index].stories
+                        let myres = Result(id: id, name: name, description: desc, modified: mod, thumbnail: thp, comics: comic, series: ser, stories: story, events: event)
                         self.results.append(myres)
                     }
                 }

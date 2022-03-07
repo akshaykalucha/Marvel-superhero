@@ -33,6 +33,10 @@ struct Result: Codable, Identifiable, Hashable {
     let description: String
     let modified: String
     let thumbnail: Thumbnail
+    let comics: CHComic
+    let series: CHSeries
+    let stories: CHStories
+    let events: CHEvents
 //
 //    enum CodingKeys: String, CodingKey {
 //        case id, name
@@ -48,4 +52,20 @@ struct Thumbnail: Codable, Hashable {
         case path
         case ext = "extension"
     }
+}
+
+struct CHComic: Codable, Hashable {
+    let available: Int
+}
+
+struct CHSeries: Codable, Hashable {
+    let available: Int
+}
+
+struct CHStories: Codable, Hashable {
+    let available: Int
+}
+
+struct CHEvents: Codable, Hashable {
+    let available: Int
 }

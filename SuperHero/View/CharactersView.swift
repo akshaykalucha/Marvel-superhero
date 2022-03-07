@@ -30,6 +30,8 @@ struct CharactersView: View {
                     .aspectRatio(geometry.size, contentMode: .fill)
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 15) {
+                        Text("Superhero")
+                            .font(Font.custom("BADABB__", size: 40))
                         HStack(spacing: 10) {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(.gray)
@@ -66,7 +68,7 @@ struct CharactersView: View {
                         ProgressView()
                             .padding(.vertical)
                             .onAppear {
-                                print("fetching")
+//                                print("fetching")
                                 dm.fetchData()
                             }
                     } else {
@@ -75,7 +77,7 @@ struct CharactersView: View {
                             let height = UIScreen.main.bounds.height / 1.3
                             
                             if !dm.fetchedCharacters.isEmpty && minY < height {
-                                print("last")
+//                                print("last")
                                 DispatchQueue.main.async {
                                     dm.mainOffset = dm.fetchedCharacters.count
                                 }
@@ -128,6 +130,7 @@ struct CharacterRowView: View {
                     .multilineTextAlignment(.leading)
                 Spacer()
                 Button {
+                    vm.modalData = self.character
                     vm.isShowingModal = true
                 } label: {
                     RoundedRectangle(cornerRadius: 8)

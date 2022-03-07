@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
+
 
 struct ModalView: View {
     @EnvironmentObject var vm: MainViewModel
     @State private var isDragging = false
     @State private var currHeight: CGFloat = 400
     let minHeight: CGFloat = 400
-    let maxHeight: CGFloat = 700
+    let maxHeight: CGFloat = 800
     let startOpacity: Double = 0.4
     let endOpacity: Double = 0.8
     
@@ -28,7 +30,7 @@ struct ModalView: View {
                         vm.isShowingModal = false
                     }
                 mainView
-                .transition(.move(edge: .bottom))
+                    .transition(.move(edge: .bottom))
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
@@ -48,22 +50,24 @@ struct ModalView: View {
             .frame(maxWidth: .infinity)
             .background(Color.white.opacity(0.00001))
             .gesture(dragGesture)
-            ZStack{
+            ScrollView(showsIndicators: false){
                 VStack{
-                    Text("This is a marvel comic modal to view your favourite super heroes")
-                        .foregroundColor(Color.black)
-                        .font(.system(size: 25, weight: .regular))
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.bottom, 10)
-                    Text("iron man")
-                        .foregroundColor(Color.black)
-                        .font(.system(size: 20, weight: .bold))
+                Text(String(vm.modalData?.name ?? ""))
+                    .foregroundColor(Color.black)
+                    .font(.system(size: 20, weight: .bold))
+                WebImage(url: URL(string: "\(vm.modalData?.thumbnail.path ?? "").\(vm.modalData?.thumbnail.ext ?? "")"))
+                    .resizable()
+                    .cornerRadius(20)
+                    .frame(width: 400, height: 400)
+                    .padding(.top, 10)
+                Text(vm.modalData?.description ?? "")
+                    .foregroundColor(Color.black)
+                    .font(.system(size: 18, weight: .regular))
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 10)
                 }
-                .padding(.horizontal, 30)
+                
             }
-            .frame(maxHeight: .infinity)
-            .padding(.bottom, 35)
         }
         .frame(height: currHeight)
         .frame(maxWidth: .infinity)
@@ -72,6 +76,10 @@ struct ModalView: View {
                 RoundedRectangle(cornerRadius: 30)
                 Rectangle()
                     .frame(height: currHeight / 2)
+//                Image("bg")
+//                    .resizable()
+//                    .frame(height: currHeight)
+//                    .cornerRadius(30)
             }
                 .foregroundColor(.white)
         )

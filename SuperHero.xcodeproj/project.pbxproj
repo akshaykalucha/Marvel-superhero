@@ -26,6 +26,8 @@
 		3A78876227CE3584001B6DC4 /* marveldc.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A78876127CE3584001B6DC4 /* marveldc.png */; };
 		3A78876427CE49A3001B6DC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A78876327CE49A3001B6DC4 /* LaunchScreen.storyboard */; };
 		3A78876627D08C37001B6DC4 /* CharactersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A78876527D08C37001B6DC4 /* CharactersView.swift */; };
+		3A82EA5727D52658001CD40E /* FontsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A82EA5627D52658001CD40E /* FontsManager.swift */; };
+		3A82EA9727D52882001CD40E /* BADABB__.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 3A82EA9627D52882001CD40E /* BADABB__.TTF */; };
 		3A9EEB2527CCBE78004EA830 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9EEB2427CCBE78004EA830 /* HomeView.swift */; };
 		3A9EEB2727CCD301004EA830 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9EEB2627CCD301004EA830 /* MainViewModel.swift */; };
 		3A9EEB2927CCD395004EA830 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9EEB2827CCD395004EA830 /* MainModel.swift */; };
@@ -49,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A37A57527D52ABB004E5D38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3A37A57627D52AE4004E5D38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3A3A04E727D09A8F009BDE14 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		3A3A04E927D09EEF009BDE14 /* ComicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicsView.swift; sourceTree = "<group>"; };
 		3A3A04EB27D0A2B0009BDE14 /* ComicsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicsModel.swift; sourceTree = "<group>"; };
@@ -65,12 +69,13 @@
 		3A5892F227C75E3300DB903F /* SuperHeroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperHeroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5892F627C75E3300DB903F /* SuperHeroUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperHeroUITests.swift; sourceTree = "<group>"; };
 		3A5892F827C75E3300DB903F /* SuperHeroUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperHeroUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		3A78874B27CDF8F8001B6DC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3A78874E27CE0E70001B6DC4 /* GifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifView.swift; sourceTree = "<group>"; };
 		3A78875A27CE3046001B6DC4 /* pokeball.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = pokeball.gif; sourceTree = "<group>"; };
 		3A78876127CE3584001B6DC4 /* marveldc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marveldc.png; sourceTree = "<group>"; };
 		3A78876327CE49A3001B6DC4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A78876527D08C37001B6DC4 /* CharactersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersView.swift; sourceTree = "<group>"; };
+		3A82EA5627D52658001CD40E /* FontsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsManager.swift; sourceTree = "<group>"; };
+		3A82EA9627D52882001CD40E /* BADABB__.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = BADABB__.TTF; sourceTree = "<group>"; };
 		3A9EEB2427CCBE78004EA830 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3A9EEB2627CCD301004EA830 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		3A9EEB2827CCD395004EA830 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
@@ -125,7 +130,7 @@
 		3A5892DA27C75E3100DB903F /* SuperHero */ = {
 			isa = PBXGroup;
 			children = (
-				3A78874B27CDF8F8001B6DC4 /* Info.plist */,
+				3A82EA9627D52882001CD40E /* BADABB__.TTF */,
 				3A9EEB2327CCBE4D004EA830 /* ViewModel */,
 				3A9EEB2227CCBE48004EA830 /* View */,
 				3A9EEB2127CCBE3C004EA830 /* Model */,
@@ -149,6 +154,7 @@
 		3A5892EB27C75E3300DB903F /* SuperHeroTests */ = {
 			isa = PBXGroup;
 			children = (
+				3A37A57527D52ABB004E5D38 /* Info.plist */,
 				3A5892EC27C75E3300DB903F /* SuperHeroTests.swift */,
 			);
 			path = SuperHeroTests;
@@ -157,6 +163,7 @@
 		3A5892F527C75E3300DB903F /* SuperHeroUITests */ = {
 			isa = PBXGroup;
 			children = (
+				3A37A57627D52AE4004E5D38 /* Info.plist */,
 				3A5892F627C75E3300DB903F /* SuperHeroUITests.swift */,
 				3A5892F827C75E3300DB903F /* SuperHeroUITestsLaunchTests.swift */,
 			);
@@ -193,6 +200,7 @@
 			children = (
 				3A9EEB2627CCD301004EA830 /* MainViewModel.swift */,
 				3A3A04F327D1EE12009BDE14 /* SuperHeroViewModel.swift */,
+				3A82EA5627D52658001CD40E /* FontsManager.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -309,6 +317,7 @@
 			files = (
 				3A78875B27CE3046001B6DC4 /* pokeball.gif in Resources */,
 				3A78876227CE3584001B6DC4 /* marveldc.png in Resources */,
+				3A82EA9727D52882001CD40E /* BADABB__.TTF in Resources */,
 				3A5892E327C75E3300DB903F /* Preview Assets.xcassets in Resources */,
 				3A78876427CE49A3001B6DC4 /* LaunchScreen.storyboard in Resources */,
 				3A5892E027C75E3300DB903F /* Assets.xcassets in Resources */,
@@ -348,6 +357,7 @@
 				3A9EEB2527CCBE78004EA830 /* HomeView.swift in Sources */,
 				3A3A04F227D1ED45009BDE14 /* SuperHeroModel.swift in Sources */,
 				3A9EEB2727CCD301004EA830 /* MainViewModel.swift in Sources */,
+				3A82EA5727D52658001CD40E /* FontsManager.swift in Sources */,
 				3A3A04E827D09A8F009BDE14 /* WebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -513,6 +523,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SuperHero/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -543,6 +554,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SuperHero/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -570,6 +582,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FN4Y62X46R;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SuperHeroTests/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.akcosh-AkshayKalucha.SuperHeroTests";
@@ -590,6 +604,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FN4Y62X46R;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SuperHeroTests/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.akcosh-AkshayKalucha.SuperHeroTests";
@@ -609,6 +625,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FN4Y62X46R;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SuperHeroUITests/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.akcosh-AkshayKalucha.SuperHeroUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -627,6 +645,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FN4Y62X46R;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SuperHeroUITests/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.akcosh-AkshayKalucha.SuperHeroUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
